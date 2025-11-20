@@ -31,7 +31,7 @@ int main()
     instructions.setCharacterSize(35);
     instructions.setFillColor(sf::Color::White);
     instructions.setPosition(10, 10);
-    instructions.setString("Click 3 points to place triangle vertices");
+    instructions.setString("Click 3 points to make the triangle");
 
     // Vectors to store triangle vertices and Chaos Game points
     vector<Vector2f> vertices;
