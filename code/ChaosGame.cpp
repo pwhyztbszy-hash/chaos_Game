@@ -126,7 +126,7 @@ int main()
         }
 
         // Draw all chaos points
-        for(int i = 0; i < points.size(); i++)
+        for(size_t i = 0; i < points.size(); i++)
         {
             RectangleShape dot(Vector2f(2, 2));
             dot.setPosition(points[i]);
