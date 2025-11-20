@@ -28,7 +28,7 @@ int main()
     // Setup instruction message
     Text instructions;
     instructions.setFont(font);
-    instructions.setCharacterSize(24);
+    instructions.setCharacterSize(35);
     instructions.setFillColor(sf::Color::White);
     instructions.setPosition(10, 10);
     instructions.setString("Click 3 points to place triangle vertices");
