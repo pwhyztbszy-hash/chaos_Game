@@ -109,19 +109,18 @@ int main()
         */
         window.clear();
 
-        // Draw instructions
         window.draw(instructions);
 
-        // Draw the 3 triangle vertices
-        for(int i = 0; i < vertices.size(); i++)
+        // Draws the triangle
+        for(size_t i = 0; i < vertices.size(); i++)
         {
-            RectangleShape rect(Vector2f(10,10));
-            rect.setPosition(vertices[i]);
-            rect.setFillColor(Color::White);
-            window.draw(rect);
+            RectangleShape rectangle(Vector2f(10,10));
+            rectangle.setPosition(vertices[i]);
+            rectangle.setFillColor(Color::White);
+            window.draw(rectangle);
         }
 
-        // Draw all chaos points
+        // Draws the chaos points
         for(size_t i = 0; i < points.size(); i++)
         {
             RectangleShape dot(Vector2f(2, 2));
