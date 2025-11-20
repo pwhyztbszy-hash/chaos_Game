@@ -16,7 +16,6 @@ int main()
     // Create and open a window for the game
     RenderWindow window(vm, "Chaos Game!!", Style::Default);
 
-    // Load font
     Font font;
     if (!font.loadFromFile("fonts/Roboto-Italic.ttf"))
     {
@@ -24,7 +23,6 @@ int main()
         return 1;
     }
 
-    // Instructions text
     Text instructions;
     instructions.setFont(font);
     instructions.setCharacterSize(24);
@@ -32,7 +30,6 @@ int main()
     instructions.setPosition(10, 10);
     instructions.setString("Click 3 points to place triangle vertices");
 
-    // Store triangle vertices and chaos points
     vector<Vector2f> vertices;
     vector<Vector2f> points;
 
@@ -54,29 +51,29 @@ int main()
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button == sf::Mouse::Left)
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
+                cout << "the left button was pressed" << std::endl;
+                cout << "mouse x: " << event.mouseButton.x << std::endl;
+                cout << "mouse y: " << event.mouseButton.y << std::endl;
+
+                if(vertices.size() < 3)
                 {
-                    cout << "the left button was pressed" << std::endl;
-                    cout << "mouse x: " << event.mouseButton.x << std::endl;
-                    cout << "mouse y: " << event.mouseButton.y << std::endl;
+                    vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
 
-                    // FIRST 3 CLICKS → TRIANGLE VERTICES
-                    if(vertices.size() < 3)
+                    if (vertices.size() == 3)
                     {
-                        vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
-
-                        if (vertices.size() == 3)
-                        {
-                            instructions.setString("Click a 4th point to start Chaos Game");
-                        }
-                    }
-                    // 4TH CLICK → STARTING POINT
-                    else if(points.size() == 0)
-                    {
-                        points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
-                        instructions.setString("Generating fractal...");
+                        instructions.setString("Click a 4th point to start Chaos Game");
                     }
                 }
+                else if(points.size() == 0)
+                {
+                    ///fourth click
+                    ///push back to points vector
+                    points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
+                    instructions.setString("Generating Chaos Game...");
+                }
+            }
             }
         }
 
@@ -92,17 +89,16 @@ int main()
         */
         if(points.size() > 0)
         {
-            // Generate 100 points each frame (faster fractal)
             for (int i = 0; i < 100; i++)
             {
-                int r = rand() % 3;  // pick random vertex
-                Vector2f last = points.back(); // last generated point
-                Vector2f v = vertices[r];      // chosen vertex
+                int r = rand() % 3; 
+                Vector2f last = points.back(); 
+                Vector2f v = vertices[r]; 
                 Vector2f mid(
                     (last.x + v.x) / 2,
                     (last.y + v.y) / 2
                 );
-                points.push_back(mid);         // store new point
+                points.push_back(mid);  
             }
         }
 
@@ -121,7 +117,7 @@ int main()
         {
             RectangleShape rect(Vector2f(10,10));
             rect.setPosition(vertices[i]);
-            rect.setFillColor(Color::Blue);
+            rect.setFillColor(Color::White);
             window.draw(rect);
         }
 
